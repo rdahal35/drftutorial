@@ -21,10 +21,11 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '76nflqs5_854yut8ce6riqgi(owcn0#$=6$ci*c=9x*#mb0_lm'
+# SECRET_KEY = '76nflqs5_854yut8ce6riqgi(owcn0#$=6$ci*c=9x*#mb0_lm'
 
+SECRET_KEY=config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=false, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -92,16 +93,24 @@ WSGI_APPLICATION = 'drftutorial.wsgi.application'
 # }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'drftutorial',
+#         'USER': 'rupesh',
+#         'PASSWORD': 'Dangnepal1!',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'drftutorial',
-        'USER': 'rupesh',
-        'PASSWORD': 'Dangnepal1!',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
