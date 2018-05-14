@@ -1,0 +1,3 @@
+[
+  "test/catalog/test_views.py::TestProductionList::test_can_get_product_list"
+]
